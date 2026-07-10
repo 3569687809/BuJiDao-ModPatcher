@@ -103,7 +103,8 @@ BuJiDao-PlatformPatcher
 
 📸 截图
 
-（此处添加程序截图）
+<img width="482" height="370" alt="image" src="https://github.com/user-attachments/assets/3bf0e9cf-b294-42c0-9a52-092dc578a7c7" />
+
 
 ---
 
@@ -117,10 +118,14 @@ BuJiDao-PlatformPatcher
 
 📄 License
 
-本项目采用 MIT License。
+本项目采用 GPL-3.0
 
 ---
 
 👤 Author
 
 KOKO-GPT
+
+---
+
+有编译需求的，请运行资源文件夹内的build.bat
