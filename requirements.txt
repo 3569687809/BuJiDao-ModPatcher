@@ -1,0 +1,7 @@
+PySide6
+pywin32
+psutil
+pyinstaller
+winotify
+pystray
+pillow
