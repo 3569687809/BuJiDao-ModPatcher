@@ -300,6 +300,14 @@ class MinecraftMonitor(QThread):
 
                                     clear_new_path()
 
+                                    self.old_id = get_folder_id(
+                                        self.current_new_file
+                                    )
+
+                                    self.log(
+                                        f"旧文件ID更新为：{self.old_id}"
+                                    )
+
                                     success(
                                         "已保存旧路径\n等待下次启动游戏..."
                                     )
@@ -369,7 +377,7 @@ class MinecraftMonitor(QThread):
                         # Minecraft关闭后才会升级为旧路径
                         # ==================================
 
-                        from file_state import save_new_path
+
 
                         save_new_path(
                             self.current_new_file
