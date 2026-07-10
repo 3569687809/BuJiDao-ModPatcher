@@ -96,6 +96,17 @@ class MinecraftMonitor(QThread):
                                         new_old_id = get_folder_id(self.current_new_file)
                                         self.file_watcher.update_old_folder_id(new_old_id)
                                         self.file_watcher.clear_queue()
+                                    self.old_id = get_folder_id(
+                                        self.current_new_file
+                                    )
+
+                                    self.log(
+                                        f"旧文件ID更新为：{self.old_id}"
+                                    )
+
+                                    success(
+                                        "已保存旧路径\n等待下次启动游戏..."
+                                    )
 
                                     success_notify("已保存旧路径\n等待下次启动游戏...")
 
@@ -150,6 +161,90 @@ class MinecraftMonitor(QThread):
             return path
 
         return None
+    def inject(self):
+
+
+                """
+                执行注入
+                """
+
+
+                try:
+
+
+                    result = self.patcher.start_patch()
+
+                    if result["success"]:
+
+                        self.injected = True
+
+                        self.window_lost_count = 0
+
+                        # ==================================
+                        # 保存当前新文件路径
+                        #
+                        # 注意：
+                        # 这里不是保存旧路径
+                        # 只是记录本次正在使用的新路径
+                        #
+                        # Minecraft关闭后才会升级为旧路径
+                        # ==================================
+
+
+
+                        save_new_path(
+                            self.current_new_file
+                        )
+
+                        self.log(
+                            result["message"]
+                        )
+
+
+
+                    else:
+
+
+
+                     # 文件占用情况
+
+                        if result.get(
+                        "occupied",
+                        False
+                        ):
+
+
+                            self.injected = True
+
+
+
+                            warning(
+                            "检测到文件被占用，无需重复注入"
+                            )
+
+
+
+                            self.log(
+                            "文件被占用，认为已经注入"
+                            )
+
+                        else:
+
+                            self.injected = True
+
+                            error(
+                            "注入失败，请查看错误报告"
+                            )
+
+                            self.log(
+                            result["message"]
+                            )
+
+                            self.log(
+                            "本次Minecraft启动注入失败，停止重复尝试"
+                            )
+
+
 
     def inject(self):
         
