@@ -5,3 +5,4 @@ pyinstaller
 winotify
 pystray
 pillow
+watchdog
